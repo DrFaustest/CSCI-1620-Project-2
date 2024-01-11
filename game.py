@@ -17,23 +17,21 @@ class Game:
 
     def start(self):
         # Initialize game start
-        play_button = pygame.Rect(100, 100, 200, 50)  # Example position and size
-        quit_button = pygame.Rect(100, 200, 200, 50)  # Example position and size
+        play_button_img = pygame.image.load("assets\images\Library of the unused\png\Buttons\Rect-Medium\PlayText\Default.png")
+        play_button_rect = play_button_img.get_rect()
+        play_button_rect.center = (self.screen_width // 2, self.screen_height // 2)
 
-        # Drawing the buttons
-        pygame.draw.rect(self.screen, [255, 0, 0], play_button)  # Red play button
-        pygame.draw.rect(self.screen, [0, 255, 0], quit_button)  # Green quit button
+        # Draw game start screen
+        self.screen.fill((0, 0, 0))
+        self.background.update()
+        self.screen.blit(play_button_img, play_button_rect)
 
         # Check for mouse click
-        click = pygame.mouse.get_pressed()
-        if click[0] == 1:  # Left mouse button
-            mouse_pos = pygame.mouse.get_pos()
-            if play_button.collidepoint(mouse_pos):
-                self.state = "PLAYING"
-            elif quit_button.collidepoint(mouse_pos):
-                pygame.quit()
-                exit()
-
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
+                mouse_pos = event.pos
+                if play_button_rect.collidepoint(mouse_pos):
+                    self.state = "PLAYING"
 
     def update(self):
         self.keys = pygame.key.get_pressed()
