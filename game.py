@@ -2,6 +2,7 @@
 import pygame
 from background import Background
 from player import Player
+from enemy import Enemy
 from util import *
 
 class Game:
@@ -14,6 +15,10 @@ class Game:
         self.start_x = self.screen_width // 2
         self.player = Player(self.start_x, self.start_y, self.screen_width)
         self.background = Background(screen, self.screen_width, self.screen_height)
+        initial_x = self.screen_width // 2
+        initial_y = 0
+        enemy_type = 1
+        self.enemies = [Enemy(screen, initial_x, initial_y, enemy_type)]
 
     def start(self):
         # Initialize game start
@@ -42,6 +47,8 @@ class Game:
             self.player.move_left()
         if self.key_pressed_right:
             self.player.move_right()
+        for enemy in self.enemies:
+            enemy.move()
 
     def draw(self):
         # Draw game entities
@@ -50,6 +57,8 @@ class Game:
         if not self.key_pressed_left and not self.key_pressed_right:
             self.player.update()
         self.player.draw(self.screen)
+        for enemy in self.enemies:
+            enemy.draw()
 
     def game_over(self):
         # Handle game over logic

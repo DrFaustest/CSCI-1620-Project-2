@@ -16,8 +16,6 @@ def main():
     clock = pygame.time.Clock()
     clock.tick(60)
 
-    # Set up the player
-
     game = Game(screen)
 
     # Main game loop
