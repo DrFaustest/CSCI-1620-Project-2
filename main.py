@@ -1,6 +1,5 @@
+# initializes the game loop and manages game states (like start, play, game over).
 import pygame
-from background import Background
-from player import Player
 from game import Game
 from util import *
 
