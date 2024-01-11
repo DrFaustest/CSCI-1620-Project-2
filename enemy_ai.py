@@ -12,13 +12,17 @@ class EnemyAI:
     def calculate_movement(self):
         # Logic to move towards player while maintaining a distance
         # Include evasion logic and boundary checks
+        pass
 
     def decide_attack(self):
         # Decide when to attack based on distance and line of sight
+        pass
 
     def perform_evasion(self):
         # Implement evasion maneuvers
+        pass
 
     def execute(self):
         # Main method to be called each frame
         # Combine movement, attack, and evasion logic
+        pass
