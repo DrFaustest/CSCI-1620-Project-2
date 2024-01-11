@@ -17,28 +17,43 @@ class Game:
 
     def start(self):
         # Initialize game start
+        play_button = pygame.Rect(100, 100, 200, 50)  # Example position and size
+        quit_button = pygame.Rect(100, 200, 200, 50)  # Example position and size
+
+        # Drawing the buttons
+        pygame.draw.rect(self.screen, [255, 0, 0], play_button)  # Red play button
+        pygame.draw.rect(self.screen, [0, 255, 0], quit_button)  # Green quit button
+
+        # Check for mouse click
+        click = pygame.mouse.get_pressed()
+        if click[0] == 1:  # Left mouse button
+            mouse_pos = pygame.mouse.get_pos()
+            if play_button.collidepoint(mouse_pos):
+                self.state = "PLAYING"
+            elif quit_button.collidepoint(mouse_pos):
+                pygame.quit()
+                exit()
 
 
     def update(self):
-        # Update game entities
-        # Get the state of all keys
-        keys = pygame.key.get_pressed()
-        key_pressed_left = keys[pygame.K_LEFT]  # Check if the left arrow key is pressed
-        key_pressed_right = keys[pygame.K_RIGHT]  # Check if the right arrow key is pressed
-
+        self.keys = pygame.key.get_pressed()
+        self.key_pressed_left = self.keys[pygame.K_LEFT]
+        self.key_pressed_right = self.keys[pygame.K_RIGHT]
         # ... event handling for key presses ...
-        if key_pressed_left:
+        if self.key_pressed_left:
             self.player.move_left()
-        if key_pressed_right:
+        if self.key_pressed_right:
             self.player.move_right()
+        # Add an indented block of code here
 
     def draw(self):
         # Draw game entities
         self.screen.fill((0, 0, 0))
         self.background.update()
-        if not key_pressed_left and not key_pressed_right:
+        if not self.key_pressed_left and not self.key_pressed_right:
             self.player.update()
         self.player.draw(self.screen)
 
     def game_over(self):
         # Handle game over logic
+        pass
