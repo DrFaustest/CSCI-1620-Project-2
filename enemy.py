@@ -8,7 +8,9 @@ class Enemy:
         self.screen = screen
         self.x = x
         self.y = y
+        self.speed = 0.5 * scaleFactor
         self.scaleFactor = scaleFactor
+        self.game_boundaries = (5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT-10)
         self.type = type if type is not None else 1 if random.random() < 0.7 else 2
         self.size = 40 * self.scaleFactor
         # Load images
@@ -27,33 +29,37 @@ class Enemy:
         self.screen.blit(rotated_image, (self.x, self.y))
 
     def move(self):
+        left, top, right, bottom = self.game_boundaries
+        
         if self.type == 1:
-            # movement pattern for type 1
+            # Movement pattern for type 1
             if self.wave == 1:
-                if self.x < SCREEN_WIDTH and self.bounce == 0: 
-                    self.x += 1
-                    self.y += 1
-                    self.angle += 1
-                elif self.x == SCREEN_WIDTH or self.bounce == 1: 
+                if self.x < right and self.bounce == 0: 
+                    self.x += self.speed
+                    self.y += self.speed
+                    self.angle = 1
+                elif self.x >= right or self.bounce == 1:
                     self.bounce = 1
-                    self.x -= 1
-                    self.y += 1
-                    self.angle += 1
-                elif self.y == 0 and self.bounce == 1:
+                    self.x -= self.speed
+                    self.y += self.speed
+                    self.angle = -1
+                elif self.y <= top and self.bounce == 1:
                     self.bounce = 0
 
         elif self.type == 2:
+            # Movement pattern for type 2
             if self.wave == 1:
-                if self.x < SCREEN_WIDTH and self.bounce == 0: 
-                    self.x += 1
-                    self.angle += 1
-                elif self.x == SCREEN_WIDTH or self.x == 0:
+                if self.x < right and self.bounce == 0:
+                    self.x += self.speed
+                    self.angle = 1
+                elif self.x >= right or self.x <= left:
                     self.bounce = 1 if self.bounce == 0 else 0
-                    self.x -= 1
-                    self.y -= SCREEN_HEIGHT // 4
-                    self.angle += 1
-        # Translate the movement logic based on self.wave and score
-        # Update self.x, self.y, and self.angle
+                    self.x -= self.speed
+                    self.y -= bottom // 4
+                    self.angle = -1
+
+            # Translate the movement logic based on self.wave and score
+            # Update self.x, self.y, and self.angle
 
     @classmethod
     def spawn(cls, screen, x, wave, scaleFactor=1):
