@@ -8,7 +8,7 @@ class Enemy:
         self.screen = screen
         self.x = x
         self.y = y
-        self.speed = 0.5 * scaleFactor
+        self.speed = 1 * scaleFactor
         self.scaleFactor = scaleFactor
         self.game_boundaries = (5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT-10)
         self.type = type if type is not None else 1 if random.random() < 0.7 else 2
@@ -30,7 +30,19 @@ class Enemy:
 
     def move(self):
         left, top, right, bottom = self.game_boundaries
-        
+
+        # Horizontal Movement
+        self.x += self.speed
+        # Reverse direction if it hits the left or right boundary
+        if self.x <= left or self.x >= right:
+            self.speed_x = -self.speed_x
+
+        # Vertical Movement
+        self.y += self.speed
+        # Reverse direction if it hits the top or bottom boundary
+        if self.y <= top or self.y >= bottom:
+            self.speed = -self.speed
+'''       
         if self.type == 1:
             # Movement pattern for type 1
             if self.wave == 1:
@@ -57,12 +69,12 @@ class Enemy:
                     self.x -= self.speed
                     self.y -= bottom // 4
                     self.angle = -1
-
+'''
             # Translate the movement logic based on self.wave and score
             # Update self.x, self.y, and self.angle
 
-    @classmethod
-    def spawn(cls, screen, x, wave, scaleFactor=1):
+@classmethod
+def spawn(cls, screen, x, wave, scaleFactor=1):
         return cls(screen, x, 0, wave, scaleFactor)
 
 # You'll need to translate the rotateImage function logic and integrate it with the draw method.
