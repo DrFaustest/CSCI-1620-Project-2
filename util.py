@@ -1,7 +1,7 @@
 # For common functions or classes used across different modules (like collision detection, sound management).
 
 # Constants
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 1800
 SCREEN_HEIGHT = 1200
 WHITE_COLOR = (255, 255, 255)
 # More constants...

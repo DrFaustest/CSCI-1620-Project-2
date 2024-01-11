@@ -2,6 +2,8 @@
 import pygame
 from game import Game
 from util import *
+from enemy_ai import EnemyAI
+from player import Player
 
 def main():
     # Initialize Pygame

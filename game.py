@@ -4,6 +4,7 @@ from background import Background
 from player import Player
 from enemy import Enemy
 from util import *
+from enemy_ai import EnemyAI
 
 class Game:
     def __init__(self, screen):
@@ -19,6 +20,7 @@ class Game:
         initial_y = 0
         enemy_type = 1
         self.enemies = [Enemy(screen, initial_x, initial_y, enemy_type)]
+        self.enemy_ai = EnemyAI((self.player.x, self.player.y), (self.enemies[0].x, self.enemies[0].y))
 
     def start(self):
         # Initialize game start
@@ -47,7 +49,9 @@ class Game:
             self.player.move_left()
         if self.key_pressed_right:
             self.player.move_right()
+        self.player.position = (self.player.x, self.player.y)
         for enemy in self.enemies:
+            self.enemy_ai.update_positions(self.player.position, enemy.position)
             enemy.move()
 
     def draw(self):

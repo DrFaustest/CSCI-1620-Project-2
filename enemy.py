@@ -10,7 +10,7 @@ class Enemy:
         self.y = y
         self.speed = 1 * scaleFactor
         self.scaleFactor = scaleFactor
-        self.game_boundaries = (5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT-10)
+        self.game_boundaries = (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
         self.type = type if type is not None else 1 if random.random() < 0.7 else 2
         self.size = 40 * self.scaleFactor
         # Load images
@@ -35,7 +35,7 @@ class Enemy:
         self.x += self.speed
         # Reverse direction if it hits the left or right boundary
         if self.x <= left or self.x >= right:
-            self.speed_x = -self.speed_x
+            self.x = -self.speed
 
         # Vertical Movement
         self.y += self.speed
