@@ -12,17 +12,12 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Space Shooter Game")
 
-    # Set up the background
-    background = Background(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     # Set up the clock
     clock = pygame.time.Clock()
     clock.tick(60)
 
     # Set up the player
-    start_x = screen_width // 2
-    start_y = screen_height - 85  # 50 pixels from the bottom of the screen
-    player = Player(start_x, start_y, screen_width)
 
     game = Game(screen)
 

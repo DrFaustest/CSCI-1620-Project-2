@@ -8,8 +8,9 @@ class Game:
     def __init__(self, screen):
         self.screen = screen
         self.state = "START"
-        self.screen_width = 1500
-        self.screen_height = 800
+        self.screen_width = SCREEN_WIDTH
+        self.screen_height = SCREEN_HEIGHT
+        self.start_y = self.screen_height - 85
         self.start_x = self.screen_width // 2
         self.player = Player(self.start_x, self.start_y, self.screen_width)
         self.background = Background(screen, self.screen_width, self.screen_height)
@@ -27,17 +28,17 @@ class Game:
 
         # ... event handling for key presses ...
         if key_pressed_left:
-            player.move_left()
+            self.player.move_left()
         if key_pressed_right:
-            player.move_right()
+            self.player.move_right()
 
     def draw(self):
         # Draw game entities
-        screen.fill((0, 0, 0))
-        background.update()
+        self.screen.fill((0, 0, 0))
+        self.background.update()
         if not key_pressed_left and not key_pressed_right:
-            player.update()
-        player.draw(screen)
+            self.player.update()
+        self.player.draw(self.screen)
 
     def game_over(self):
         # Handle game over logic
