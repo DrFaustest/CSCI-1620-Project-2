@@ -1,0 +1,1 @@
+# Manages enemy behavior, including spawning, movement, and attack patterns.

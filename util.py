@@ -1,0 +1,1 @@
+# For common functions or classes used across different modules (like collision detection, sound management).

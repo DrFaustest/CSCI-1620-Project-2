@@ -1,0 +1,1 @@
+# Controls the bullets' properties and movement, both for the player and the enemies.
