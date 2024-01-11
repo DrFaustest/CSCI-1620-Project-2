@@ -44,7 +44,6 @@ class Game:
             self.player.move_left()
         if self.key_pressed_right:
             self.player.move_right()
-        # Add an indented block of code here
 
     def draw(self):
         # Draw game entities
